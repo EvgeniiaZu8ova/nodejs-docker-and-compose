@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  backend:
+    container_name: compose-back-container
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    image: compose-back-optimal-image
+    networks:
+      - internal-network
+      - internet
+    ports:
+      - 4000:3000
+    env_file:
+      - .env
+    depends_on:
+      - database
+
+  frontend:
+    container_name: compose-front-container
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    image: compose-front-optimal-image
+    networks:
+      - internet
+    ports:
+      - 8081:80
+
+  database:
+    container_name: postgress
+    image: postgress
+    networks:
+      - internal-network
+    volumes:
+      - postgres_data:/data/postgres
+    env_file:
+      - .env
+
+networks:
+  internal-network:
+    driver: bridge
+    internal: true
+  internet:
+    driver: bridge
+
+volumes:
+  postgres_data:
