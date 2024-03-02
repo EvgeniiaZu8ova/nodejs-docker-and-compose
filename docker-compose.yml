@@ -12,6 +12,7 @@ services:
       - internet
     ports:
       - 4000:3000
+    restart: unless-stopped
     env_file:
       - backend/.env
     depends_on:
@@ -27,6 +28,7 @@ services:
       - internet
     ports:
       - 8081:80
+    restart: unless-stopped
 
   database:
     container_name: postgres
@@ -37,6 +39,7 @@ services:
       - postgres_data:/data/postgres
     env_file:
       - backend/.env
+    restart: unless-stopped
 
 networks:
   internal-network:
