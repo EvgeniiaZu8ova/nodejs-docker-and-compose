@@ -13,7 +13,7 @@ services:
     ports:
       - 4000:3000
     env_file:
-      - .env
+      - backend/.env
     depends_on:
       - database
 
@@ -29,14 +29,14 @@ services:
       - 8081:80
 
   database:
-    container_name: postgress
-    image: postgress
+    container_name: postgres
+    image: postgres
     networks:
       - internal-network
     volumes:
       - postgres_data:/data/postgres
     env_file:
-      - .env
+      - backend/.env
 
 networks:
   internal-network:
