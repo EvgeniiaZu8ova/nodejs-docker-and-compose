@@ -1,6 +1,7 @@
 import {
   IsDefined,
   IsEmail,
+  IsOptional,
   IsString,
   IsUrl,
   Length,
@@ -18,10 +19,12 @@ export class CreateUserDto {
   @MinLength(2)
   password: string;
 
+  @IsOptional()
   @IsString()
   @Length(0, 200)
   about: string = 'Пока ничего не рассказал о себе';
 
+  @IsOptional()
   @IsUrl()
   avatar: string;
 
